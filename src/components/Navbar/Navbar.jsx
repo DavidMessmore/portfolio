@@ -91,7 +91,7 @@ const Navbar = ({ lan, setLan }) => {
           <FaGithub className="inline-block align-top" />
         </a>
         <a
-          href="www.linkedin.com/in/david-m-50b230138"
+          href="https://www.linkedin.com/in/david-m-50b230138/"
           target="_blank"
           className="hover:text-zinc-500 duration-200 text-3xl"
         >

@@ -7,7 +7,8 @@ import {
   FaGitAlt,
   FaArrowDown,
 } from "react-icons/fa";
-import myCV from "./../../assets/DavidMessmoreCV.pdf";
+import myCVEng from "./../../assets/DavidMessmoreCV(English).pdf";
+import myCVPort from "./../../assets/DavidMessmoreCV(Português).pdf";
 import { FaUserAstronaut, FaHtml5, FaPhp } from "react-icons/fa6";
 import { IoLogoJavascript } from "react-icons/io5";
 import { SiTailwindcss } from "react-icons/si";
@@ -73,8 +74,8 @@ const About = ({ lan }) => {
           </p>
 
           <a
-            // href={myCV}
-            // download="DavidMessmoreCV"
+            href={lan == "eng" ? myCVEng : myCVPort}
+            download="DavidMessmoreCV"
             className="bg-blue-800 text-white px-4 py-2 rounded-md mt-10 block w-fit hover:bg-blue-600 duration-300"
           >
             <FaArrowDown className="inline-block align-middle " />{" "}
