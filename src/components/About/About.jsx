@@ -13,6 +13,11 @@ import { FaUserAstronaut, FaHtml5, FaPhp } from "react-icons/fa6";
 import { IoLogoJavascript } from "react-icons/io5";
 import { SiTailwindcss } from "react-icons/si";
 
+const cvs = {
+  port: myCVPort,
+  eng: myCVEng,
+};
+
 const text = {
   port: [
     "Sobre Mim",
@@ -74,7 +79,7 @@ const About = ({ lan }) => {
           </p>
 
           <a
-            href={lan == "eng" ? myCVEng : myCVPort}
+            href={cvs[lan]}
             download="DavidMessmoreCV"
             className="bg-blue-800 text-white px-4 py-2 rounded-md mt-10 block w-fit hover:bg-blue-600 duration-300"
           >
