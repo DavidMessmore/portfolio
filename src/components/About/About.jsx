@@ -73,8 +73,8 @@ const About = ({ lan }) => {
           </p>
 
           <a
-            href={myCV}
-            download="DavidMessmoreCV"
+            // href={myCV}
+            // download="DavidMessmoreCV"
             className="bg-blue-800 text-white px-4 py-2 rounded-md mt-10 block w-fit hover:bg-blue-600 duration-300"
           >
             <FaArrowDown className="inline-block align-middle " />{" "}

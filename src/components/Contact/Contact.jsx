@@ -29,7 +29,7 @@ const text = {
 };
 
 const Contact = ({ lan }) => {
-  const [isOpen, setIsOpen] = useState(true);
+  const [isOpen, setIsOpen] = useState(false);
   const [isError, setIsError] = useState(false);
 
   const form = useRef();
