@@ -1,8 +1,8 @@
-import Hero from "./components/Hero/Hero";
-import About from "./components/About/About";
-import Projects from "./components/Projects/Projects";
-import Contact from "./components/Contact/Contact";
-import Navbar from "./components/Navbar/Navbar";
+import Hero from "./components/hero/Hero";
+import About from "./components/about/About";
+import Projects from "./components/projects/Projects";
+import Contact from "./components/contact/Contact";
+import Navbar from "./components/navbar/Navbar";
 import { useState } from "react";
 
 function App() {
