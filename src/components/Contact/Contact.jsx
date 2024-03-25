@@ -1,6 +1,6 @@
-import { IoIosMail, IoIosSend } from "react-icons/io";
+import { IoIosMail, IoIosSend, IoLogoGameControllerA } from "react-icons/io";
 import { BsExclamationCircle } from "react-icons/bs";
-import React, { useRef, useState } from "react";
+import React, { useState } from "react";
 import emailjs from "@emailjs/browser";
 
 const text = {
@@ -31,33 +31,70 @@ const text = {
 const Contact = ({ lan }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [isError, setIsError] = useState(false);
+  const [formData, setFormData] = useState({
+    user_name: "",
+    user_email: "",
+    message: "",
+  });
 
-  const form = useRef();
+  const [formErrors, setFormErrors] = useState({});
+
+  const validateForm = () => {
+    let newErrors = {};
+
+    if (!formData.user_name) {
+      newErrors.user_name = "Name is required";
+    }
+    if (!formData.user_email) {
+      newErrors.user_email = "Email is required";
+    } else if (!/^\S+@\S+\.\S+$/.test(formData.user_email)) {
+      newErrors.user_email = "Invalid email format";
+    }
+    if (!formData.message) {
+      newErrors.message = "Message is required";
+    }
+    setFormErrors(newErrors);
+
+    return Object.keys(newErrors).length === 0;
+  };
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+
+    setFormData({
+      ...formData,
+      [name]: value,
+    });
+  };
 
   const sendEmail = (e) => {
     e.preventDefault();
 
-    emailjs
-      .sendForm(
-        "service_g90c3ih",
-        "contact_form",
-        form.current,
-        "iVbQtaNPwK8m04oyQ"
-      )
-      .then(
-        (result) => {
-          console.log(result.text);
-          setIsOpen(true);
-          setIsError(false);
-          form.current.reset();
-        },
-        (error) => {
-          setIsOpen(true);
-          setIsError(true);
-          console.log(error.text);
-        }
-      );
+    const isValid = validateForm();
+
+    if (isValid) {
+      emailjs
+        .send("service_g90c3ih", "contact_form", formData, "iVbQtaNPwK8m04oyQ")
+        .then(
+          (result) => {
+            console.log(result.text);
+            setIsOpen(true);
+            setIsError(false);
+            setFormData({
+              user_name: "",
+              user_email: "",
+              message: "",
+            });
+          },
+          (error) => {
+            setIsOpen(true);
+            setIsError(true);
+            console.log(error.text);
+          }
+        );
+    }
   };
+
   return (
     <section
       id="contact"
@@ -69,33 +106,59 @@ const Contact = ({ lan }) => {
       <p className="text-center px-2">{text[lan][1]}</p>
       <div className="bg-zinc-100 p-8 rounded-lg drop-shadow-lg text-lg xl:w-1/2 border border-stone-400">
         <form
-          ref={form}
           onSubmit={sendEmail}
-          className="grid grid-cols-2 gap-10 text-xl"
+          className="grid grid-cols-2 gap-10 text-xl pt-4"
         >
           <label htmlFor="">
             <input
               type="text"
               name="user_name"
-              className="px-4 py-2 border-2	border-stone-400 outline-none hover:border-stone-700 focus:border-stone-700 w-full duration-300"
+              value={formData.user_name}
+              onChange={handleChange}
+              className={`px-4 py-2 border-2 ${
+                formErrors.user_name
+                  ? "border-red-400 hover:border-red-500 focus:border-red-700"
+                  : "border-stone-400 hover:border-stone-700 focus:border-stone-700"
+              } outline-none w-full duration-300`}
               placeholder={text[lan][2]}
             />
+            {formErrors.user_name && (
+              <p className="text-red-500 mt-2">{formErrors.user_name}</p>
+            )}
           </label>
 
           <label htmlFor="">
             <input
-              type="email"
+              type="text"
               name="user_email"
-              className="px-4 py-2 border-2	border-stone-400 outline-none hover:border-stone-700 focus:border-stone-700 w-full duration-300"
+              value={formData.user_email}
+              onChange={handleChange}
+              className={`px-4 py-2 border-2 ${
+                formErrors.user_email
+                  ? "border-red-400 hover:border-red-500 focus:border-red-700"
+                  : "border-stone-400 hover:border-stone-700 focus:border-stone-700"
+              } outline-none w-full duration-300`}
               placeholder={text[lan][3]}
             />
+            {formErrors.user_email && (
+              <p className="text-red-500 mt-2">{formErrors.user_email}</p>
+            )}
           </label>
           <label htmlFor="" className="col-span-2">
             <textarea
               name="message"
-              className="px-4 py-2 border-2	border-stone-400 outline-none hover:border-stone-700 focus:border-stone-700 duration-300 w-full min-h-32"
+              value={formData.message}
+              onChange={handleChange}
+              className={`px-4 py-2 border-2 ${
+                formErrors.message
+                  ? "border-red-400 hover:border-red-500 focus:border-red-700"
+                  : "border-stone-400 hover:border-stone-700 focus:border-stone-700"
+              } outline-none w-full duration-300 min-h-32`}
               placeholder={text[lan][4]}
             />
+            {formErrors.message && (
+              <p className="text-red-500">{formErrors.message}</p>
+            )}
           </label>
           <button
             type="submit"
