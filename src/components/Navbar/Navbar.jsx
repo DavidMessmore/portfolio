@@ -1,65 +1,65 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from 'react'
 import {
   FaGithub,
   FaLinkedin,
   FaInstagram,
   FaGlobe,
   FaBars,
-} from "react-icons/fa6";
-import { SiUpwork } from "react-icons/si";
+} from 'react-icons/fa6'
+import { SiUpwork } from 'react-icons/si'
 
 const text = {
-  port: ["Início", "Sobre", "Projetos", "Contato", "Inglês", "Português"],
-  eng: ["Home", "About", "Projects", "Get in Contact", "English", "Portuguese"],
-};
+  port: ['Início', 'Sobre', 'Projetos', 'Contato', 'Inglês', 'Português'],
+  eng: ['Home', 'About', 'Projects', 'Get in Contact', 'English', 'Portuguese'],
+}
 
 const Navbar = ({ lan, setLan }) => {
-  const [scrolled, setScrolled] = useState(false);
-  const [open, setOpen] = useState(false);
-  const [showMobileNav, setShowMobileNav] = useState(false);
+  const [scrolled, setScrolled] = useState(false)
+  const [open, setOpen] = useState(false)
+  const [showMobileNav, setShowMobileNav] = useState(false)
 
-  const dropRef = useRef(null);
+  const dropRef = useRef(null)
 
   useEffect(() => {
-    document.addEventListener("mousedown", handleOutsideClick);
+    document.addEventListener('mousedown', handleOutsideClick)
     return () => {
-      document.removeEventListener("mousedown", handleOutsideClick);
-    };
-  });
+      document.removeEventListener('mousedown', handleOutsideClick)
+    }
+  })
 
   const handleOutsideClick = (e) => {
     if (dropRef.current && !dropRef.current.contains(e.target)) {
-      setShowMobileNav(false);
+      setShowMobileNav(false)
     }
-  };
+  }
 
   useEffect(() => {
     const onScroll = () => {
       if (window.scrollY > 60) {
-        setScrolled(true);
+        setScrolled(true)
       } else {
-        setScrolled(false);
+        setScrolled(false)
       }
-    };
+    }
 
-    window.addEventListener("scroll", onScroll);
+    window.addEventListener('scroll', onScroll)
 
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
+    return () => window.removeEventListener('scroll', onScroll)
+  }, [])
 
   const handleButtonEng = () => {
-    setLan("eng");
-    setOpen(false);
-  };
+    setLan('eng')
+    setOpen(false)
+  }
   const handleButtonPort = () => {
-    setLan("port");
-    setOpen(false);
-  };
+    setLan('port')
+    setOpen(false)
+  }
 
   return (
     <nav
       className={`fixed top-0 w-screen text-white text-lg sm:text-2xl z-10 duration-200 ${
-        scrolled ? " bg-zinc-800" : ""
+        scrolled ? ' bg-zinc-900' : ''
       }`}
     >
       <div className="hidden lg:flex flex-row justify-center gap-10 items-center py-3">
@@ -86,28 +86,28 @@ const Navbar = ({ lan, setLan }) => {
         <a
           href="https://github.com/DavidMessmore"
           target="_blank"
-          className="hover:text-zinc-500 duration-200 text-3xl"
+          className="hover:text-blue-500 duration-200 text-3xl"
         >
           <FaGithub className="inline-block align-top" />
         </a>
         <a
           href="https://www.linkedin.com/in/david-m-50b230138/"
           target="_blank"
-          className="hover:text-zinc-500 duration-200 text-3xl"
+          className="hover:text-blue-500 duration-200 text-3xl"
         >
           <FaLinkedin className="inline-block align-top" />
         </a>
         <a
           href="https://www.upwork.com/freelancers/~01c3ed148c653a6893"
           target="_blank"
-          className="hover:text-zinc-500 duration-200 text-3xl"
+          className="hover:text-blue-500 duration-200 text-3xl"
         >
           <SiUpwork className="inline-block align-top" />
         </a>
         <a
           href="https://www.instagram.com/david_messmore/"
           target="_blank"
-          className="hover:text-zinc-500 duration-200 text-3xl"
+          className="hover:text-blue-500 duration-200 text-3xl"
         >
           <FaInstagram className="inline-block align-top" />
         </a>
@@ -115,7 +115,7 @@ const Navbar = ({ lan, setLan }) => {
         <div className="relative ">
           <button
             onClick={() => setOpen((pv) => !pv)}
-            className="hover:text-zinc-500 duration-200 "
+            className="hover:text-blue-500 duration-200 "
           >
             <FaGlobe className="inline-block align-top" />
           </button>
@@ -152,7 +152,7 @@ const Navbar = ({ lan, setLan }) => {
         <div className="flex justify-end">
           <button
             onClick={() => setShowMobileNav(!showMobileNav)}
-            className="text-5xl hover:text-zinc-500 duration-200"
+            className="text-5xl hover:text-blue-500 duration-200"
           >
             <FaBars />
           </button>
@@ -183,23 +183,23 @@ const Navbar = ({ lan, setLan }) => {
               <a
                 href="https://github.com/DavidMessmore"
                 target="_blank"
-                className="hover:text-zinc-500 duration-200 text-3xl"
+                className="hover:text-blue-500 duration-200 text-3xl"
               >
                 <FaGithub className="inline-block align-top" />
               </a>
-              <a href="#" className="hover:text-zinc-500 duration-200 text-3xl">
+              <a href="#" className="hover:text-blue-500 duration-200 text-3xl">
                 <FaLinkedin className="inline-block align-top" />
               </a>
-              <a href="#" className="hover:text-zinc-500 duration-200 text-3xl">
+              <a href="#" className="hover:text-blue-500 duration-200 text-3xl">
                 <SiUpwork className="inline-block align-top" />
               </a>
-              <a href="#" className="hover:text-zinc-500 duration-200 text-3xl">
+              <a href="#" className="hover:text-blue-500 duration-200 text-3xl">
                 <FaInstagram className="inline-block align-top" />
               </a>
               <div className="relative ">
                 <button
                   onClick={() => setOpen((pv) => !pv)}
-                  className="hover:text-zinc-500 duration-200 text-3xl"
+                  className="hover:text-blue-500 duration-200 text-3xl"
                 >
                   <FaGlobe className="inline-block align-top" />
                 </button>
@@ -236,6 +236,6 @@ const Navbar = ({ lan, setLan }) => {
         )}
       </div>
     </nav>
-  );
-};
-export default Navbar;
+  )
+}
+export default Navbar

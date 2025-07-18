@@ -1,113 +1,121 @@
-import { IoIosMail, IoIosSend, IoLogoGameControllerA } from "react-icons/io";
-import { BsExclamationCircle } from "react-icons/bs";
-import React, { useState } from "react";
-import emailjs from "@emailjs/browser";
+import { IoIosMail, IoIosSend, IoLogoGameControllerA } from 'react-icons/io'
+import { BsExclamationCircle } from 'react-icons/bs'
+import React, { useState } from 'react'
+import emailjs from '@emailjs/browser'
 
 const text = {
   port: [
-    "Contato",
-    "Se você tiver alguma dúvida ou apenas quiser dizer oi, não hesite em usar o formulário.",
-    "Nome",
-    "Email",
-    "Como posso ajudar?",
-    "Enviar",
-    "Email enviado com sucesso",
-    "Algo deu errado, tente novamente mais tarde ou tente pelas redes sociais",
-    "Entendido!",
+    'Contato',
+    'Se você tiver alguma dúvida ou apenas quiser dizer oi, não hesite em usar o formulário.',
+    'Nome',
+    'Email',
+    'Como posso ajudar?',
+    'Enviar',
+    'Email enviado com sucesso',
+    'Algo deu errado, tente novamente mais tarde ou tente pelas redes sociais',
+    'Entendido!',
+    'O nome é necessário',
+    'O Email é necessário',
+    'Formato inválido de Email',
+    'A Mensagem é necessária',
   ],
   eng: [
-    "Contact",
+    'Contact',
     "Whether you have a question or just want to say hi, don't hesitate to use the form.",
-    "Name",
-    "Email",
-    "How can I help you?",
-    "Submit",
-    "Email submitted successfully",
-    "Something went wrong, please try again later or try via social media",
-    "Understood",
+    'Name',
+    'Email',
+    'How can I help you?',
+    'Submit',
+    'Email submitted successfully',
+    'Something went wrong, please try again later or try via social media',
+    'Understood',
+    'Name is required',
+    'Email is required',
+    'Invalid email format',
+    'Message is required',
   ],
-};
+}
 
 const Contact = ({ lan }) => {
-  const [isOpen, setIsOpen] = useState(false);
-  const [isError, setIsError] = useState(false);
+  const [isOpen, setIsOpen] = useState(false)
+  const [isError, setIsError] = useState(false)
   const [formData, setFormData] = useState({
-    user_name: "",
-    user_email: "",
-    message: "",
-  });
+    user_name: '',
+    user_email: '',
+    message: '',
+  })
 
-  const [formErrors, setFormErrors] = useState({});
+  const [formErrors, setFormErrors] = useState({})
 
   const validateForm = () => {
-    let newErrors = {};
+    let newErrors = {}
 
     if (!formData.user_name) {
-      newErrors.user_name = "Name is required";
+      newErrors.user_name = text[lan][9]
     }
     if (!formData.user_email) {
-      newErrors.user_email = "Email is required";
+      newErrors.user_email = text[lan][10]
     } else if (!/^\S+@\S+\.\S+$/.test(formData.user_email)) {
-      newErrors.user_email = "Invalid email format";
+      newErrors.user_email = text[lan][11]
     }
     if (!formData.message) {
-      newErrors.message = "Message is required";
+      newErrors.message = text[lan][12]
     }
-    setFormErrors(newErrors);
+    setFormErrors(newErrors)
 
-    return Object.keys(newErrors).length === 0;
-  };
+    return Object.keys(newErrors).length === 0
+  }
 
   const handleChange = (e) => {
-    const { name, value } = e.target;
+    const { name, value } = e.target
 
     setFormData({
       ...formData,
       [name]: value,
-    });
-  };
+    })
+  }
 
   const sendEmail = (e) => {
-    e.preventDefault();
+    e.preventDefault()
 
-    const isValid = validateForm();
+    const isValid = validateForm()
 
     if (isValid) {
       emailjs
-        .send("service_g90c3ih", "contact_form", formData, "iVbQtaNPwK8m04oyQ")
+        .send('service_g90c3ih', 'contact_form', formData, 'iVbQtaNPwK8m04oyQ')
         .then(
           (result) => {
-            console.log(result.text);
-            setIsOpen(true);
-            setIsError(false);
+            console.log(result.text)
+            setIsOpen(true)
+            setIsError(false)
             setFormData({
-              user_name: "",
-              user_email: "",
-              message: "",
-            });
+              user_name: '',
+              user_email: '',
+              message: '',
+            })
           },
           (error) => {
-            setIsOpen(true);
-            setIsError(true);
-            console.log(error.text);
+            setIsOpen(true)
+            setIsError(true)
+            console.log(error.text)
           }
-        );
+        )
     }
-  };
+  }
 
   return (
     <section
       id="contact"
-      className="pb-36 flex flex-col justify-center items-center gap-10 sm:text-lg transition-colors"
+      className="py-20 flex flex-col justify-center text-white items-center gap-10 sm:text-lg transition-colors  bg-gradient-to-r from-zinc-900 to-emerald-900  "
     >
-      <h2 className="text-4xl sm:text-6xl text-center text-blue-800 font-black">
+      <h2 className="text-4xl sm:text-6xl text-center font-black">
         <IoIosMail className="inline-block align-top" /> {text[lan][0]}
       </h2>
       <p className="text-center px-2">{text[lan][1]}</p>
-      <div className="bg-zinc-100 p-8 rounded-lg drop-shadow-lg text-lg xl:w-1/2 border border-stone-400">
+      <div className="bg-gray-100 p-8 rounded-lg drop-shadow-lg text-lg xl:w-1/2 border border-stone-400">
         <form
           onSubmit={sendEmail}
-          className="grid grid-cols-2 gap-10 text-xl pt-4"
+          className="grid grid-cols-2 gap-10 text-xl pt-4 text-black"
         >
           <label htmlFor="">
             <input
@@ -117,8 +125,8 @@ const Contact = ({ lan }) => {
               onChange={handleChange}
               className={`px-4 py-2 border-2 ${
                 formErrors.user_name
-                  ? "border-red-400 hover:border-red-500 focus:border-red-700"
-                  : "border-stone-400 hover:border-stone-700 focus:border-stone-700"
+                  ? 'border-red-400 hover:border-red-500 focus:border-red-700'
+                  : 'border-stone-400 hover:border-stone-700 focus:border-stone-700'
               } outline-none w-full duration-300`}
               placeholder={text[lan][2]}
             />
@@ -135,8 +143,8 @@ const Contact = ({ lan }) => {
               onChange={handleChange}
               className={`px-4 py-2 border-2 ${
                 formErrors.user_email
-                  ? "border-red-400 hover:border-red-500 focus:border-red-700"
-                  : "border-stone-400 hover:border-stone-700 focus:border-stone-700"
+                  ? 'border-red-400 hover:border-red-500 focus:border-red-700'
+                  : 'border-stone-400 hover:border-stone-700 focus:border-stone-700'
               } outline-none w-full duration-300`}
               placeholder={text[lan][3]}
             />
@@ -151,8 +159,8 @@ const Contact = ({ lan }) => {
               onChange={handleChange}
               className={`px-4 py-2 border-2 ${
                 formErrors.message
-                  ? "border-red-400 hover:border-red-500 focus:border-red-700"
-                  : "border-stone-400 hover:border-stone-700 focus:border-stone-700"
+                  ? 'border-red-400 hover:border-red-500 focus:border-red-700'
+                  : 'border-stone-400 hover:border-stone-700 focus:border-stone-700'
               } outline-none w-full duration-300 min-h-32`}
               placeholder={text[lan][4]}
             />
@@ -164,7 +172,7 @@ const Contact = ({ lan }) => {
             type="submit"
             value="Submit"
             name="submit"
-            className="bg-blue-800 text-white px-4 py-2 rounded-md block w-fit hover:bg-blue-600 duration-300"
+            className="bg-emerald-800 text-white px-4 py-2 rounded-md block w-fit hover:bg-emerald-600 duration-300"
           >
             <IoIosSend className="inline-block align-middle" /> {text[lan][5]}
           </button>
@@ -189,6 +197,6 @@ const Contact = ({ lan }) => {
         </div>
       )}
     </section>
-  );
-};
-export default Contact;
+  )
+}
+export default Contact
