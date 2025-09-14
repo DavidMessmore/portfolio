@@ -6,8 +6,8 @@ const ROTATION_RANGE = 32.5
 const HALF_ROTATION_RANGE = 32.5 / 2
 
 const text = {
-  port: ['Olá, meu nome é David', 'Um Desenvolvedor Web'],
-  eng: ['Hello, my name is David', 'A Web Developer'],
+  port: ['Olá, meu nome é David', 'Desenvolvedor Front-End'],
+  eng: ['Hello, my name is David', 'Front-End Developer'],
 }
 
 const HeroText = ({ lan }) => {

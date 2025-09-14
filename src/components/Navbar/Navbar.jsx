@@ -1,4 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
+import br from '../../assets/br.svg'
+import us from '../../assets/us.svg'
 import {
   FaGithub,
   FaLinkedin,
@@ -46,6 +48,14 @@ const Navbar = ({ lan, setLan }) => {
 
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
+
+  const handleLan = () => {
+    setOpen(false)
+    if (lan === 'port') {
+      return setLan('eng')
+    }
+    return setLan('port')
+  }
 
   const handleButtonEng = () => {
     setLan('eng')
@@ -114,31 +124,15 @@ const Navbar = ({ lan, setLan }) => {
 
         <div className="relative ">
           <button
-            onClick={() => setOpen((pv) => !pv)}
+            onClick={handleLan}
             className="hover:text-blue-500 duration-200 "
           >
-            <FaGlobe className="inline-block align-top" />
+            {lan === 'port' ? (
+              <img src={us} alt="usa flag" className=" w-8 rounded" />
+            ) : (
+              <img src={br} alt="brazil flag" className=" w-8 rounded" />
+            )}
           </button>
-          {open && (
-            <ul className="flex flex-col gap-2 p-2 rounded-lg bg-white text-black shadow-xl absolute top-[120%] left-[50%] ">
-              <li>
-                <button
-                  onClick={handleButtonEng}
-                  className="px-4 py-2 w-full rounded hover:bg-blue-500 duration-200"
-                >
-                  {text[lan][4]}
-                </button>
-              </li>
-              <li>
-                <button
-                  onClick={handleButtonPort}
-                  className="px-4 py-2 w-full rounded hover:bg-blue-500 duration-200"
-                >
-                  {text[lan][5]}
-                </button>
-              </li>
-            </ul>
-          )}
         </div>
 
         <a

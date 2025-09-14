@@ -6,7 +6,7 @@ import Navbar from './components/Navbar/Navbar'
 import { useState } from 'react'
 
 function App() {
-  const [lan, setLan] = useState('eng')
+  const [lan, setLan] = useState('port')
 
   return (
     <div className="overflow-x-hidden">

@@ -7,8 +7,8 @@ import {
   FaGitAlt,
   FaArrowDown,
 } from 'react-icons/fa'
-import myCVEng from './../../assets/DavidMessmoreCV(English).pdf'
-import myCVPort from './../../assets/DavidMessmoreCV(Português).pdf'
+import myCVEng from './../../assets/CurriculumDavidMessmore.pdf'
+import myCVPort from './../../assets/CurrículoDavidMessmore.pdf'
 import { FaUserAstronaut, FaHtml5, FaPhp } from 'react-icons/fa6'
 import { IoLogoJavascript } from 'react-icons/io5'
 import { SiTailwindcss } from 'react-icons/si'
@@ -29,7 +29,7 @@ const text = {
     'e atualmente estou cursando Ciência da Computação na UFBA.',
     '🎯 Sou bastante entusiasmado enquanto aprendo, crio e resolvo desafios, e',
     'amaria poder trabalhar com um time que divide as mesmas inspirações que as minhas',
-    ' E sim, eu curto coisas espaciais e minhar cor favorita é azul.',
+    ' E sim, eu curto coisas espaciais e minha cor favorita é azul.',
     'Baixar Curriculo',
     'Habilidades e Tecnologias',
     '⭐Aqui está as coisas que eu posso fazer⭐',
