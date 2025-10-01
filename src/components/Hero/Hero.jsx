@@ -57,7 +57,7 @@ const HeroText = ({ lan }) => {
         style={{
           transform: 'translateZ(75px)',
         }}
-        className="text-2xl sm:text-5xl lg:text-7xl font-semibold text-center"
+        className="text-2xl sm:text-5xl lg:text-7xl font-bold text-center"
       >
         {text[lan][0]}
       </h2>
@@ -77,7 +77,7 @@ const Hero = ({ lan }) => {
   return (
     <header
       id="home"
-      className="h-screen w-full flex flex-col items-center justify-center transition-colors text-white bg-blend-luminosity "
+      className="h-lvh w-full flex flex-col items-center justify-center transition-colors text-white bg-blend-luminosity "
     >
       <video
         src={video}
